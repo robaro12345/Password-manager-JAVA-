@@ -29,7 +29,7 @@ public class Database {
                 System.out.println("Username: " + username + "\nPassword: " + password);
                 System.out.println("+------------------+------------------+");
             } else System.out.println("No such name was found ");
-            if (rs.getString("password").length() < 8) System.out.println("Your is less than 8 characters It would be better if you update it.");
+            if (rs.getString("password").length() < 8) System.out.println("!!!Your password is less than 8 characters It would be better if you update it.!!!");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -50,9 +50,7 @@ public class Database {
             pstmt.setString(3, password);
             int rowsAffected = pstmt.executeUpdate();
             System.out.println("Password Added");
-            if (password.length() < 8){
-                System.out.println("Your is less than 8 characters It would be better if you update it.");
-            }
+            if (password.length() < 8) System.out.println("!!!Your password is less than 8 characters It would be better if you update it.!!!");
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -80,7 +78,7 @@ public class Database {
         String Select = "SELECT name FROM \""+userVerified+"\"";
         try (PreparedStatement pstmt = connection.prepareStatement(Select)) {
             ResultSet execute = pstmt.executeQuery();
-            if (execute.next()){
+            if (execute.isBeforeFirst()){
                 System.out.println("+--------+Application names+--------+");
                 while (execute.next()){
                     System.out.println("\n"+execute.getString("name"));
@@ -109,7 +107,7 @@ public class Database {
                     int Effect = pstmt.executeUpdate();
                     if(Effect > 0)System.out.println("Password updated successfully.");
                     else System.out.println("Name not found");
-                    if (password.length() < 8) System.out.println("Your is less than 8 characters It would be better if you update it.");
+                    if (password.length() < 8) System.out.println("!!!Your password is less than 8 characters It would be better if you update it.!!!");
                 }catch (SQLException e){
                     System.out.println(e.getMessage());
                 }
@@ -141,7 +139,7 @@ public class Database {
                     int Effect = pstmt.executeUpdate();
                     if(Effect > 0)System.out.println("Username and Password updated successfully.");
                     else System.out.println("Name not found");
-                    if (password.length() < 8) System.out.println("Your is less than 8 characters It would be better if you update it.");
+                    if (password.length() < 8) System.out.println("!!!Your password is less than 8 characters It would be better if you update it.!!!");
                 }catch (SQLException e){
                     System.out.println(e.getMessage());
                 }
